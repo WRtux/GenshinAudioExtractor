@@ -1,0 +1,3 @@
+[submodule "inflator"]
+	path = inflator
+	url = https://github.com/WRtux/PtADPCMInflate.git
