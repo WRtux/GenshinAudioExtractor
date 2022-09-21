@@ -2,6 +2,8 @@
 setlocal enableextensions enabledelayedexpansion
 
 :init-param
+set compress=compress
+
 set bindir=%~dp0\bin
 set codebook=packed_codebooks_aoTuV_603.bin
 
@@ -59,8 +61,14 @@ for %%f in ("%tempdir%\*.wav") do (
  java -jar "%bindir%\ptadpcminflate.jar" "%%f" "%output%\%%~nf.wav"
  if !errorlevel! equ 0 (
   del "%%f"
+  if "%compress%" equ "compress" (
+   "%bindir%\flac\flac.exe" "%output%\%%~nf.wav" -o "%output%\%%~nf.flac" && (
+    del "%output%\%%~nf.wav"
+   ) || echo Warning: Failed to encode "%output%\%%~nf.wav" to FLAC.
+  )
   echo.
  ) else if !errorlevel! equ 1 (
+  echo Passing to ww2ogg to handle...
   echo.
   "%bindir%\ww2ogg\ww2ogg.exe" "%%f" -o "%%~dpnf.ogg" --pcb "%bindir%\ww2ogg\%codebook%" && (
    "%bindir%\revorb.exe" "%%~dpnf.ogg" "%output%\%%~nf.ogg" && (
@@ -77,7 +85,7 @@ for %%f in ("%tempdir%\*.wav") do (
 
 :cleanup
 if exist "%tempdir%\*.wav" (
- if not exist "%output%\bad" (
+ if not exist "%output%\bad\*" (
   md "%output%\bad" 2>nul
  )
  move /y "%tempdir%\*.wav" "%output%\bad"
