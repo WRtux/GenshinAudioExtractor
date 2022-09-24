@@ -8,7 +8,7 @@ This tool is designed to automatically extract the audio resources from `.pck` f
 
 ## Getting Started
 
-Binary files are not included in the repository. It's recommended to begin with the latest release.  
+Binary files are not included in the repository. It's recommended to begin with the latest [release](//github.com/WRtux/GenshinAudioExtractor/releases), which brings out-of-the-box experience with everything needed packed. You can also download and run [`download.cmd`](/download.cmd) to set up the tool from scratch.  
 Java environment is required to run this tool.
 
 **Graphical interface (in Windows Explorer):** Drop one `.pck` file or directory containing `.pck` files to `extract.cmd`, wait for the process to finish. Extracted files will be in `output/`, located in the same directory with `extract.cmd`.
@@ -17,4 +17,4 @@ Java environment is required to run this tool.
 
 ## License
 
-The extracting script `extract.cmd` and PtADPCMInflate are provided under the MIT License. Please refer to [`/copy/`](/copy/) for the documents of other applications used in this project.
+The main part of this tool is provided under the [MIT License](/LICENSE.txt). Please refer to `copy/` directory after setting up the tool for the licenses of other projects used in this project.
